@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HTML DOM template -->
+      <h1>{{message}}</h1>
+      <input type="text" v-model="message" />
+    </div>
+
+    <script>
+      // step 1
+      // Vue.createApp()
+
+      // step 2
+      // Vue.createApp({})
+
+      // step 3 掛載到 HTML
+      // Vue.createApp({}).mount('#app')
+
+      // step 4
+      Vue.createApp({
+        data() {
+          // 變數放這裡
+          return {
+            message: "Hello",
+          };
+        },
+      }).mount("#app");
+
+      // let man = new Object()
+      let man = {
+        name: "Peter",
+        age: 40,
+        gender: "male",
+        favoriateColor: ["black", "gray", "white"],
+        car: {
+          make: "BMW",
+          mode: "X5",
+          year: 2023,
+        },
+        retired: false,
+
+        sayHello: function () {}, // ES5
+        sayHello() {}, // ES6
+        sayHello: () => {}, // 箭頭函數
+      };
+    </script>
+  </body>
+</html>

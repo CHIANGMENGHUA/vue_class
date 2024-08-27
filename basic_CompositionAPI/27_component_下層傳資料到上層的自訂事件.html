@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <!-- 1 -->
+        <!-- <the-button></the-button> -->
+
+        <!-- 2 -->
+        <the-button @my-click="fromChild"></the-button>
+    </div>    
+
+    <script> 
+        const vm = Vue.createApp ({
+            methods: {
+                // 2-1 沒有傳參數進來
+                // fromChild(){
+                //     alert(`Hello, Parent!`)
+                // },
+
+                // 2-2 接收一個參數
+                // fromChild(x){
+                //     alert(`Hello, Parent! Give me ${x} dollars.`)
+                // },
+
+                // 2-3 接收多個參數
+                fromChild(x, y, z){
+                    alert(`Hello, Parent! Give me ${x} or ${y} or ${z} dollars.`)
+                },
+            },
+        })
+
+        vm.component('the-button', {
+        // 1
+            // step 1
+            // template: `<button> Click </button>`,
+
+            // step 2
+            // template: `<button @click="clicked"> Click </button>`,   
+            // methods: {
+            //     clicked(){
+            //         alert(`Hi, child!`)
+            //     },
+            // },
+
+        // 2
+            template: `<button @click="clicked"> Click </button>`,
+            methods: {
+                clicked(){
+                    // 2-1 使用 this.$emit() 發出自訂事件，沒有傳參數                    
+                    // this.$emit('my-click')
+
+                    // 2-2 使用 this.$emit() 發出自訂事件，傳一個參數(payload)                    
+                    // this.$emit('my-click', 100)
+
+                    // 2-3 使用 this.$emit() 發出自訂事件，傳多個參數                    
+                    this.$emit('my-click', 100, 200, 300)
+                },
+            },
+        })
+
+        vm.mount('#app') 
+    </script>
+</body>
+</html>

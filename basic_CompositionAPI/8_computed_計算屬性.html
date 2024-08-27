@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HTML DOM template -->
+      <p>{{today}}</p>
+      <p>
+        <label>身高:</label>
+        <input v-model="height" />
+      </p>
+      <p>
+        <label>體重:</label>
+        <input v-model="weight" />
+      </p>
+      <p>BMI: {{calculate}}</p>
+    </div>
+
+    <script>
+      const { ref, computed } = Vue;
+      const App = {
+        setup() {
+          const message = ref("Hello");
+          const height = ref(0);
+          const weight = ref(0);
+
+          const calculate = computed(() => {
+            if (weight.value > 0 && height.value > 0) {
+              let bmi = weight.value / Math.pow(height.value / 100, 2);
+              return bmi.toFixed(2);
+            } else {
+              return 0;
+            }
+          });
+
+          const today = computed(() => {
+            let doNothing = height.value + weight.value + calculate.value;
+            return new Date().toTimeString();
+          });
+
+          return {
+            message,
+            height,
+            weight,
+            calculate,
+            today,
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

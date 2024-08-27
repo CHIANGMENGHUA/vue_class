@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <my-component sayhello="Hello" text="VueJS"></my-component>
+
+        <your-component say-hello="Hello" the-text="world"></your-component>
+    </div>    
+
+    <script> 
+        const vm = Vue.createApp ()
+
+        vm.component('my-component', {
+            props: ['sayhello','text'],
+            template: `<h1>{{sayhello}} {{text}}</h1>`,
+        })
+
+        vm.component('your-component', {
+            props: ['say-hello','the-text'],    // kebab-case 可以
+            // props: ['sayHello','theText'],   // camelCase 也可以
+
+            // template: `<h1>{{say-hello}} {{the-text}}</h1>`,   // 不能使用 kebab-case
+            template: `<h1>{{sayHello}} {{theText}}</h1>`,        // 只能使用 camelCase
+        })
+
+        vm.mount('#app') 
+    </script>
+</body>
+</html>

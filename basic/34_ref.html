@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    />
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HTML DOM template -->
+      <!-- 1 -->
+      <h3>使用 ref 屬性定義 element</h3>
+      <input type="text" ref="inputDOM" />
+
+      <!-- 2 新增一個組件 -->
+      <h3>使用 ref 屬性取得組件的資料</h3>
+      <button @click="getComponentInfo">Get Info</button>
+      <counter ref="counter"></counter>
+
+      <!-- 3 搭配 bootstrap -->
+      <h3>使用 ref 搭配 bootstrap</h3>
+      <button @click="openModal">Open Bootstrap Modal</button>
+
+      <div class="modal" tabindex="-1" ref="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {
+            count: 0,
+          };
+        },
+
+        methods: {
+          getComponentInfo() {
+            this.$refs.counter.message = "fuck off";
+            this.$refs.counter.content =
+              "meow~ meow~ meow~ meow~ meow~ meow~ meow~";
+          },
+          openModal() {
+            this.bootstrapModal.show();
+          },
+        },
+
+        mounted() {
+          // console.log(this.$refs);
+          // console.log(this.$refs.inputDOM);
+          // console.log(this.$refs.modal);
+          this.$refs.inputDOM.focus();
+          this.bootstrapModal = new bootstrap.Modal(this.$refs.modal);
+        },
+      });
+
+      vm.component("counter", {
+        data() {
+          return {
+            message: "Hello",
+            content:
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, unde.",
+          };
+        },
+
+        template: `
+          <div>
+            <h3>{{message}}</h3>
+            <p>{{content}}</p>
+          </div>
+        `,
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>

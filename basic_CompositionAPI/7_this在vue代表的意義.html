@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">  <!-- HTML DOM template -->
+        <ul>
+            <!-- <li v-for="color in colors" v-on:click="showColor(color)">{{color}}</li> -->
+        
+            <!-- 「 v-on」的縮寫為「@」 -->
+            <li v-for="color in colors" @click="showColor(color)">{{color}}</li>
+        </ul>
+    </div>
+    
+    <script>
+        /*
+            this 在 vue 代表的意義(page 14)
+            √ this 在 JavaScript 代表執行當下的外層物件，
+                所以 this 在執行時候才有意義，
+                至於 this 代表哪一個物件，跟它的情境(context)有關
+
+            √ 箭頭函數內並沒有定義 this，所以 this 會往外層找
+
+            √ Vue Options API 的 this 都應該代表 Vue 物件本身
+
+        */
+        Vue.createApp({
+            data(){     // 變數放這裡
+                return {
+                    message: 'Hello',
+                    colors: ['red','orange','yellow','green','blue','indigo','violet'],
+                }
+            },
+            methods: {  // 函數(方法)大部分放這裡
+                showColor(theColor){
+                    // alert(theColor)
+                    // alert(this.message + ' ' + theColor + '!')
+                    // alert(`${this.message} ${theColor}!`)
+                    alert(`${this.$data.message} ${theColor}!`)
+
+                    this.action()
+                },
+                action(){
+                    alert(`@@@@@@`)
+                },
+            },
+        }).mount('#app') 
+    </script>
+</body>
+</html>

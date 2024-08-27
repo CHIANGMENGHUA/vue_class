@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <my-component sayhell="hell" text="vuejs"></my-component>
+      <your-component say-hell="hell" the-text="vuejs"></your-component>
+    </div>
+
+    <script>
+      const vm = Vue.createApp();
+
+      vm.component("my-component", {
+        props: ["sayhell", "text"],
+        template: `
+          <h1>{{sayhell}}, {{text}}</h1>
+        `,
+      });
+
+      vm.component("your-component", {
+        props: ["say-hell", "the-text"],
+        template: `
+          <h1>{{sayHell}}, {{theText}}</h1>
+        `,
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>

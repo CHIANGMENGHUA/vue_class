@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li
+          v-for="color in colors"
+          @click="showColor(color)"
+          style="cursor: pointer"
+        >
+          {{color}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "Hello",
+            colors: [
+              "red",
+              "orange",
+              "yellow",
+              "green",
+              "blue",
+              "indigo",
+              "purple",
+            ],
+          };
+        },
+        methods: {
+          showColor(color) {
+            alert(`${this.message} ${color}!`);
+            this.action();
+          },
+          action() {
+            alert("hahaha");
+          },
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

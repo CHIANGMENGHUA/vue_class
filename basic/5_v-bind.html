@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{name}}</h1>
+      <!-- <img v-bind:src="imgUrl" v-bind:all="name" style="border-radius: 30px" /> -->
+      <img :src="imgUrl" :all="name" style="border-radius: 30px" />
+      <hr v-for="color in colors" :color="color" />
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            name: "阿呆",
+            imgUrl:
+              "http://5b0988e595225.cdn.sohucs.com/images/20190113/492b18a980fb4ec78520468c9c94ba99.png",
+            colors: [
+              "red",
+              "orange",
+              "yellow",
+              "green",
+              "blue",
+              "indigo",
+              "purple",
+            ],
+          };
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

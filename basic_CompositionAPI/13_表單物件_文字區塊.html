@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <!-- 使用 v-model 做雙向綁定 -->
+        <!-- <input type="text" v-model="message">
+        <h3>{{message}}</h3> -->
+
+        <!-- 如果不使用 v-model，如何做雙向綁定? -->
+        <input type="text" @keyup="setMessage" :value="message">
+        <h3>{{message}}</h3>
+
+        <textarea rows="5" cols="21" v-model="message" @click="getCSS"></textarea>
+        <!-- <p style="font: 13.3333px monospace;white-space: pre;">{{message}}</p> -->
+        <p :style="setCSS">{{message}}</p>
+    </div>    
+
+    <script> 
+        Vue.createApp({
+            data(){
+                return {
+                    message: '',
+                }
+            },
+            methods: {
+                setMessage( e ){
+                    this.message = e.target.value
+                },
+                getCSS( e ){
+                    // alert(e.target.style.font)      // 找不到 CSS 屬性
+                    // alert(window.getComputedStyle(e.target).font)   // 13.3333px monospace   
+                },
+            },
+            computed: { 
+                setCSS(){
+                    return {
+                        font: `13.3333px monospace`,
+                        whiteSpace: `pre`,
+                    }
+                },
+            },
+        }).mount('#app')
+    </script>
+</body>
+</html>
+<!-- 
+What did
+    you use
+  your computer
+        for?
+-->

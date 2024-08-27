@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      .the-button {
+        background-color: #abc;
+        margin: 10px;
+        border-radius: 5px;
+      }
+
+      .the-input {
+        border-radius: 5px;
+      }
+
+      .no-text {
+        background-color: #aaa;
+      }
+    </style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <input class="the-input" type="text" v-model="message" />
+      <button
+        :class="{
+        'the-button': true,
+        'no-text': this.message.length === 0,
+      }"
+      >
+        Click Me
+      </button>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "",
+          };
+        },
+        methods: {},
+        computed: {
+          btnClass() {
+            // if (this.message.length === 0) {
+            //   return "the-button no-text";
+            // } else {
+            //   return "the-button";
+            // }
+            // if (this.message.length === 0) {
+            //   return {
+            //     'the-button': true,
+            //     'no-text': true,
+            //   };
+            // } else {
+            //   return {
+            //     'the-button': true,
+            //     'no-text': false,
+            //   };
+            // }
+            // return {
+            //   'the-button': true,
+            //   'no-text': this.message.length === 0,
+            // };
+          },
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

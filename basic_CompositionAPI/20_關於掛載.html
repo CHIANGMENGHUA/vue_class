@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <!-- 掛載: 將 Vue 和 HTML DOM 做連結 -->
+    <div id="app"> <!-- HTML DOM template -->
+        <h1>{{message}}</h1>
+    </div>    
+
+    <script> 
+        // 1 先宣告，再掛載
+        // const vm = Vue.createApp ({
+        //     data(){
+        //         return {                    
+        //             message: 'Hello',
+        //         }
+        //     },
+        // });
+        // vm.mount('#app') 
+        
+        // 2 使用 template 和 HTML DOM 做連結
+        const vm = Vue.createApp ({
+            data(){
+                return {                    
+                    message: 'Hello',
+                }
+            },
+            methods: {},
+            computed: {},
+            mounted(){},
+
+            // template: `實際上會出現的 HTML DOM`,
+            template: `
+            <div>
+                <h1>text</h1>
+                <h2>text</h2>
+                <h3>text</h3>
+                <h4>text</h4>
+            </div>
+            `,
+        });
+        vm.mount('#app') 
+    </script>
+</body>
+</html>

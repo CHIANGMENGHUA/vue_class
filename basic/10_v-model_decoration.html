@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      #app {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        text-align: left;
+      }
+
+      p {
+        font-size: 20px;
+        white-space: pre;
+        font-family: monospace;
+      }
+    </style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      Message: <input type="text" v-model="message" />
+      <h3>{{message}}</h3>
+      <br />
+      Message(lazy): <input type="text" v-model.lazy="message" />
+      <h3>{{message}}</h3>
+      <br />
+      Integer: <input v-model.number="number" />
+      <h3>{{number + 1}}</h3>
+      <br />
+      Name: <input v-model.trim="name" />
+      <h3>{{name}}</h3>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "",
+            number: 0,
+            name: "",
+          };
+        },
+        methods: {},
+        computed: {},
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      button {
+        margin: 10px;
+      }
+    </style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="e">E</button>
+      <button @click="s">S</button>
+      <br />
+      <p :style="changeSize">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit, corrupti.
+      </p>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "",
+            size: 16,
+          };
+        },
+        methods: {
+          e() {
+            this.size += 1;
+          },
+
+          s() {
+            if (this.size > 1) {
+              this.size -= 1;
+            }
+          },
+        },
+        computed: {
+          changeSize() {
+            return {
+              fontSize: `${this.size}px`,
+              color: "maroom",
+              fontFamily: "calibri",
+            };
+          },
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

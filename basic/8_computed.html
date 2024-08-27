@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <p v-model="today">{{today}}</p>
+      <label for="">身高:</label>
+      <input type="text" v-model="height" @input="today" />
+      <br />
+      <label for="">體重:</label>
+      <input type="text" v-model="weight" @input="today" />
+      <p>BMI: {{calculate}}</p>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            height: null,
+            weight: null,
+            today: new Date(),
+          };
+        },
+        methods: {},
+        computed: {
+          calculate() {
+            if (
+              this.height != 0 &&
+              this.weight != null &&
+              this.height != null
+            ) {
+              return (this.weight / Math.pow(this.height / 100, 2)).toFixed(2);
+            }
+            return 0;
+          },
+
+          refreshToday() {
+            this.today = new Date().toTimeString();
+          },
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message}}</h1>
+      <h3>Lorem, ipsum dolor.</h3>
+      score: <input type="text" v-model="score" />
+      <p v-if="score < 0 || score > 100" style="color: red">Out of bound</p>
+      <p v-else-if="score >= 70" style="color: green">PASS</p>
+      <p v-else style="color: orange">FAIL</p>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "Hello",
+            score: 0,
+          };
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <my-component></my-component> <!-- kebab-case -->
+
+        <counter></counter>
+    </div>    
+
+    <script> 
+        const vm = Vue.createApp ({
+            data(){
+                return {                    
+                    
+                }
+            },
+            methods: {},
+            computed: {},        
+            mounted() {}, // 非同步大部分放這裡
+            watch: {},
+
+            components: {
+                // 語法 1: 組件名稱: {},
+                'my-component': {   // kebab-case --> camelCase --> PascalCase
+                    template: `<h1 style="color: red;"> Hello </h1>`,
+                },
+                myComponent: {   // camelCase
+                    template: `<h1 style="color: blue;"> Hello </h1>`,
+                },
+                MyComponent: {   // PascalCase
+                    template: `<h1 style="color: green;"> Hello </h1>`,
+                },
+            },
+        });
+
+        // 語法 2: vm.component('組件名稱', {})
+        vm.component('counter', {
+            template: `
+                <h1>野原新之助</h1>
+                <img src="../images/Shinnosuke/Shinnosuke3.png">
+            `,
+        })
+
+        vm.mount('#app') 
+    </script>
+</body>
+</html>

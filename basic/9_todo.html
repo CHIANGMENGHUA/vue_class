@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      .myli {
+        background-color: aquamarine;
+        width: 100px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 5px;
+      }
+      .myli:hover {
+        background-color: orange;
+        cursor: pointer;
+      }
+    </style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      Your Task:
+      <input type="text" v-model="newTask" @keyup.enter="addTask()" />
+      <ol>
+        <li class="myli" v-for="(t, index) in task" @click="removeTask(index)">
+          {{t}}
+        </li>
+      </ol>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            task: [],
+            newTask: "",
+          };
+        },
+        methods: {
+          addTask() {
+            this.task.push(this.newTask);
+          },
+
+          removeTask(i) {
+            this.task.splice(i, 1);
+          },
+        },
+        computed: {},
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

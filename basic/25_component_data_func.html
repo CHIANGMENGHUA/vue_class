@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <counter></counter>
+      <counter></counter>
+    </div>
+
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        methods: {},
+        computed: {},
+        mounted() {},
+        watch: {},
+        components: {},
+      });
+
+      vm.component("counter", {
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        template: `
+          <button @click="count++">Add</button>
+          <h3>{{count}}</h3>
+          <hr>
+        `,
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>

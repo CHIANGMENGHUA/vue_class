@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">  <!-- HTML DOM template -->
+        <!-- <img src="https://www.toysrus.com.tw/dw/image/v2/BDGJ_PRD/on/demandware.static/-/Sites-storefront-catalog-toysrus-tw/default/dw98a762c6/f/0/9/1/f091c0ea330285ff4eb094879a522813e334495f_shinchan_color_343x343.png?q=75" alt="野原新之助"> -->
+
+        <!-- 屬性值從 vue 取得，使用「v-bind」 -->
+        <!-- <img v-bind:src="imgURL" v-bind:alt="name"> -->
+
+        <!-- 「v-bind」的縮寫為「:」 -->
+        <img :src="imgURL" :alt="name">
+
+        <hr v-for="color in colors" :color="color">
+    </div>
+    
+    <script>
+        Vue.createApp({
+            data(){     // 變數放這裡
+                return {
+                    message: 'Hello',
+                    colors: ['red','orange','yellow','green','blue','indigo','violet'],
+
+                    imgURL: 'https://www.toysrus.com.tw/dw/image/v2/BDGJ_PRD/on/demandware.static/-/Sites-storefront-catalog-toysrus-tw/default/dw98a762c6/f/0/9/1/f091c0ea330285ff4eb094879a522813e334495f_shinchan_color_343x343.png?q=75',
+                    name: '野原新之助',
+                }
+            },
+        }).mount('#app')  
+    </script>
+</body>
+</html>

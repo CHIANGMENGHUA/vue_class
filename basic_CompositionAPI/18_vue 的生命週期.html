@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <!-- page 35 -->
+    <div id="app"> <!-- HTML DOM template -->
+        <!-- <button @click="addCount"> Add </button> -->
+        <button @click="count++"> Add </button>
+        <button id="deleteButton"> Delete </button>
+
+        <h3>{{count}}</h3>
+    </div>    
+
+    <script> 
+        const vm = Vue.createApp({
+            data(){
+                return {                    
+                    count: 0,
+                }
+            },
+            methods: {
+                addCount(){
+                    this.count++
+                },
+            },
+            computed: {},   
+            beforeCreate() {
+                console.log(`beforeCreate --> count: ${this.count}`)                
+            }, 
+            created() { // 常用
+                console.log(`created --> count: ${this.count}`)   
+            },  
+            mounted() { // 常用 // 非同步大部分放這裡
+                console.log(`mounted --> count: ${this.count}`)  
+            },
+            beforeUpdate() { // 常用
+                console.log(`beforeUpdate --> count: ${this.count}`)  
+            },     
+            updated() { // 常用
+                console.log(`updated --> count: ${this.count}`)  
+            },  
+            unmounted() {
+                console.log(`unmounted --> count: ${this.count}`)  
+            }, 
+        })
+        vm.mount('#app')
+
+        document.querySelector('#deleteButton').addEventListener('click', () => {
+            vm.unmount()
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.5/axios.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Nabla&display=swap");
+    </style>
+    <style>
+      img {
+        width: 95%;
+      }
+
+      body {
+        background-color: rgb(66, 66, 66);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .book-container {
+        background-color: white;
+        text-align: center;
+        width: 500px;
+        margin: 30px;
+        padding: 15px;
+        border: 1px solid black;
+        border-radius: 30px;
+      }
+    </style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <p style="font-size: 100px; margin: 30px; font-family: 'Nabla', system-ui">
+      Books.com
+    </p>
+    <div id="app">
+      <div class="book-container" v-for="book in books">
+        <a :href="book.url">
+          <img :src="book.image" alt="" />
+        </a>
+        <h1>書名: {{book.title}}</h1>
+        <p>作者: {{book.author}}</p>
+      </div>
+    </div>
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {
+            books: [],
+          };
+        },
+        methods: {},
+        computed: {},
+        mounted() {
+          // Async methods usually put in mounted
+          /*
+          $.getJSON("../tools/bookData.json").then((res) => {
+            this.books = res;
+          });
+          */
+          /*
+          axios.get("../tools/bookData.json").then((res) => {
+            this.books = res.data;
+          });
+          */
+
+          fetch("../tools/bookData.json")
+            .then((res) => res.json())
+            .then((resJson) => (this.books = resJson));
+        },
+      });
+
+      vm.mount(`#app`);
+    </script>
+  </body>
+</html>

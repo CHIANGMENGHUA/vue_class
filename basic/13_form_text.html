@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" @keyup="setMessage" :value="message" />
+      <h3>{{message}}</h3>
+      <textarea v-model="message" @click="getCss" rows="5" cols="22"></textarea>
+      <p :style="setCss">{{message}}</p>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "",
+          };
+        },
+        methods: {
+          setMessage(e) {
+            this.message = e.target.value;
+          },
+
+          setCss(e) {
+            return {
+              font: `13.3333px monospace`,
+            };
+          },
+
+          getCss(e) {
+            console.log(getComputedStyle(e.target).font);
+          },
+        },
+        computed: {},
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

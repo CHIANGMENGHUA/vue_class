@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .theButton{
+            background-color: #abc;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .noText{
+            background-color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- page 36 -->
+    <div id="app">  <!-- HTML DOM template -->
+        <input v-model="message">
+
+        <!-- <button class="theButton noText">Click me</button> -->
+        <!-- <button :class="btnClass">Click me</button> -->
+        <button :class="{theButton: true, noText: message.length == 0}">Click me</button>
+    </div>
+
+    <script>
+        // 綁定 class(要出現幾個 class 由 vue 決定)
+        // 1 傳回字串
+        // 2 傳回物件 Object
+
+        Vue.createApp({
+            data(){     // 變數放這裡
+                return {
+                    message: '',
+                }
+            },
+            methods: {  // 函數(方法)大部分放這裡
+                
+            },
+            computed: { // 函數(方法)也可以放這裡，但是放在這裡的函數(方法)不用傳參數，一定要有傳回值
+                btnClass(){
+                // 1 傳回字串
+                    // if(this.message.length == 0){
+                    //     return 'theButton noText'
+                    // }else{
+                    //     return 'theButton'
+                    // }
+                    
+                // 2 傳回物件 Object
+                    // if(this.message.length == 0){
+                    //     return {
+                    //         theButton: true,
+                    //         noText: true,
+                    //     }
+                    // }else{
+                    //     return {
+                    //         theButton: true,
+                    //         noText: false,
+                    //     }
+                    // }
+
+                // 3 傳回物件 Object(簡易版)  
+                    return {
+                        theButton: true,
+                        noText: this.message.length == 0,
+
+                    }
+
+
+                },
+            },
+        }).mount('#app') 
+
+    </script>
+</body>
+</html>

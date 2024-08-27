@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <!-- CSS 寫在哪裡 3: linked -->
+    <!-- <link rel="stylesheet" href="XX.css"> -->
+
+    <!-- CSS 寫在哪裡 2: embedded -->
+    <!-- <style></style> -->
+</head>
+<body>
+    <!-- page 36 -->
+    <div id="app">  <!-- HTML DOM template -->
+        <!-- CSS 寫在哪裡 1: inline  -->
+        <!-- <p style="color: red;font-size: 20px;">Lorem, ipsum dolor.</p> -->
+        
+        <button @click="enlarge">Enlarge</button>
+        <button @click="shrink">Shrink</button>
+
+        <p :style="changeSize">Lorem ipsum dolor sit amet</p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data(){     // 變數放這裡
+                return {
+                    message: '',
+                    size: 16,
+                }
+            },
+            methods: {  // 函數(方法)大部分放這裡
+                enlarge(){
+                    this.size += 2
+                },
+                shrink(){
+                    if(this.size > 0){
+                        this.size -= 2
+                    }else{
+                        this.size = 0
+                    }
+                },
+            },
+            computed: { // 函數(方法)也可以放這裡，但是放在這裡的函數(方法)不用傳參數，一定要有傳回值
+                changeSize(){
+                    return {
+                        // fontSize: this.size + 'px',
+                        fontSize: `${this.size}px`,
+                        fontFamily: 'Calibri',
+                        color: 'maroon',
+                    }
+                },
+            },
+        }).mount('#app') 
+
+    </script>
+</body>
+</html>

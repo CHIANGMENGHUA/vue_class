@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .member{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid #aaa;
+        }
+        .member img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .member input{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <div class="member">
+            <img :src="imgURL">
+            <input type="file" @change="fileChange">
+            <!-- <p>{{imgURL}}</p> -->
+        </div>
+    </div>    
+
+    <script> 
+        Vue.createApp({
+            data(){
+                return {                    
+                    imgURL: '../images/Shinnosuke/Shinnosuke2.jpg',
+                }
+            },
+            methods: {
+                fileChange( e ){
+                    let file = e.target.files[0]
+                    // console.log(file)
+
+                    let readFile = new FileReader()
+                    readFile.readAsDataURL(file)
+
+                    readFile.addEventListener('load', () => {
+                        this.imgURL = readFile.result
+                    })
+                },
+            },
+            computed: {},
+        }).mount('#app')
+    </script>
+</body>
+</html>

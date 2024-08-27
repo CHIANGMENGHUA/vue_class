@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message}}</h1>
+      <ul>
+        <li v-for="(color, index) in colors" :style="{ color: color }">
+          {{index + 1}} {{color}}
+        </li>
+      </ul>
+      <hr />
+      <ol>
+        <li v-for="(item, key) in man">{{key}}: {{item}}</li>
+      </ol>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "Hello",
+            colors: [
+              "red",
+              "orange",
+              "yellow",
+              "green",
+              "blue",
+              "indigo",
+              "purple",
+            ],
+            man: {
+              name: "Leon",
+              age: 27,
+              gender: "male",
+              favoriteNumber: [1, 2, 3],
+              car: {
+                brand: "Benz",
+                class: "s-class",
+                year: "1997",
+              },
+              retired: false,
+            },
+          };
+        },
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

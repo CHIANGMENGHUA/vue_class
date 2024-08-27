@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <button @click="count+=1"> Add </button>
+        <h3> Root ==> {{count}} </h3>
+
+        <counter :init="count"></counter>
+    </div>    
+
+
+    <script>
+        const vm = Vue.createApp ({
+            data(){
+                return {                  
+                    count: 0,
+                }
+            },
+        })
+        vm.component('counter',{
+            props: ['init'],
+            data(){
+                return {
+                    count: this.init,
+                }
+            },
+            template: `
+                <button @click="count+=1"> Add </button>
+                <h3> counter ==> {{count}} </h3>
+            `,
+        })
+
+        vm.mount('#app')
+    </script>
+</body>
+</html>

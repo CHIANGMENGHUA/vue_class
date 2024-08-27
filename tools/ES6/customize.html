@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, age, weight) {
+          this.name = name;
+          this.age = age;
+          this.weight = weight;
+        }
+      }
+
+      class Programmer extends Person {
+        constructor(name, age, weight, language) {
+          super(name, age, weight);
+          this.language = language;
+        }
+      }
+
+      const leon = new Person("Leon", 27, 65);
+      const lorem = new Person("Lorem", 27, 65, "Rust");
+
+      Object.keys(lorem).forEach((key) => {
+        console.log(`${key}: ${lorem[key]}`);
+      });
+    </script>
+  </body>
+</html>

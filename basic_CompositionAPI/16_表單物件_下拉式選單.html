@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <select v-model="selectedYear">
+            <!-- <option v-for="year in years">{{year}}</option> -->
+            <option v-for="year in 2024-1930" :value="year + 1930">{{year + 1930}}</option>
+        </select>
+        <select v-model="selectedMonth">
+            <!-- <option v-for="month in months">{{month}}</option> -->
+            <option v-for="month in 12">{{month}}</option>
+        </select>
+        <select v-model="selectedDate">
+            <option v-for="date in 31">{{date}}</option>
+        </select>
+    </div>    
+
+    <script> 
+        Vue.createApp({
+            data(){
+                return {                    
+                    years: [2023, 2024, 2025, 2026, 2027, 2028],
+                    months: ['January','February','March','April','May','June'], 
+                    
+                    // selectedYear: new Date().getFullYear(),
+                    // selectedMonth: new Date().getMonth() + 1,   // 月份從 0 開始
+                    // selectedDate: new Date().getDate(),
+                }
+            },
+            methods: {},
+            computed: {
+                selectedYear(){
+                    return new Date().getFullYear()
+                },
+                selectedMonth(){
+                    return new Date().getMonth() + 1
+                },
+                selectedDate(){
+                    return new Date().getDate()
+                },
+            },
+        }).mount('#app')
+
+
+
+        switch(month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                days = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                days = 30;
+                break;
+            default:                 
+                days = (year % 4 != 0) ? 28 : 29;    // days = 28 或 days = 29
+        }
+    </script>
+</body>
+</html>

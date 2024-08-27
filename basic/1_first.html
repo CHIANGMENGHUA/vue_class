@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message}}</h1>
+      <input type="text" v-model="message" />
+    </div>
+    <script>
+      // step 1
+      Vue.createApp();
+
+      // step 2
+      Vue.createApp({});
+
+      // step 3
+      Vue.createApp({
+        data() {
+          return {
+            message: "Hello",
+          };
+        },
+      }).mount(`#app`);
+
+      // step 4
+      // step 5
+
+      // new object
+      let man = {
+        name: "Leon",
+        age: 27,
+        gender: "male",
+        favoriteNumber: [1, 2, 3],
+        car: {
+          brand: "Benz",
+          class: "s-class",
+          year: "1997",
+        },
+        retired: false,
+        sayHello() {
+          console.log("Hello");
+        },
+      };
+    </script>
+  </body>
+</html>

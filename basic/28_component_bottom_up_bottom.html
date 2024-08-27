@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      .item {
+        background-color: #abc;
+        padding: 5px;
+        margin: 5px;
+        font-family: Tahoma;
+        width: 193px;
+      }
+      .item:hover {
+        background-color: #cba;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HTML DOM template -->
+      Your task: <input type="text" v-model="newTask" @keyup.enter="addTask" />
+
+      <ol>
+        <li
+          v-for="(task,index) in tasks"
+          class="item"
+          @click="removeTask(index)"
+        >
+          {{task}}
+        </li>
+      </ol>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          // 變數放這裡
+          return {
+            tasks: [],
+            newTask: "",
+          };
+        },
+        methods: {
+          // 函數(方法)大部分放這裡
+          addTask() {
+            this.tasks.push(this.newTask);
+            this.newTask = "";
+          },
+          removeTask(index) {
+            this.tasks.splice(index, 1);
+          },
+        },
+        computed: {
+          // 函數(方法)也可以放這裡，但是放在這裡的函數(方法)不用傳參數，一定要有傳回值
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

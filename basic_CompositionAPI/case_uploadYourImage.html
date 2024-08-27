@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .box{
+            border: 8px dashed #ccc;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+
+            position: relative;
+        }
+        .add{
+            font: bold 100px Tahoma;
+            color: #ccc;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .box input{
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <div class="box">
+            <div class="add">+</div>
+            <input type="file" @change="fileChange">
+        </div>
+
+        <div style="width: 300px;text-align: center;margin: 10px;">
+            <button style="font-size: large;">Upload</button>
+        </div>
+    </div>    
+
+    <script> 
+        Vue.createApp({
+            data(){
+                return {                    
+                    imgURL: '',
+                }
+            },
+            methods: {
+                fileChange( e ){
+                    let file = e.target.files[0]
+                    // console.log(file)
+
+                    let readFile = new FileReader()
+                    readFile.readAsDataURL(file)
+
+                    readFile.addEventListener('load', () => {
+                        // this.imgURL = readFile.result
+                    // 動態新增
+                    // 1 先建立標籤(或建立 Image 物件)
+                        let image = document.createElement('img')
+                        // let image = new Image()
+
+                    // 2 將該標籤的屬性和方法寫好
+                        image.src = readFile.result
+                        image.style.width = '100%'
+                        image.style.height = '100%'
+
+                    // 3 找到爸爸，加進去
+                        let box = document.querySelector('.box')
+                        // 先確定爸爸有沒有小孩?
+                        // alert(box.childNodes.length)
+
+                        // 如果有要先刪除
+                        // 寫法 1
+                        // while(box.childNodes.length >= 1){
+                        //     box.removeChild(box.firstChild)
+                        // }
+                        // 寫法 2
+                        box.innerHTML = ''
+
+                        // 再顯示新物件
+                        box.appendChild(image)
+                    })
+                },
+            },
+            computed: {},
+        }).mount('#app')
+    </script>
+</body>
+</html>

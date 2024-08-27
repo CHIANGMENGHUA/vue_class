@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <!-- <input type="file"> 不能使用 v-model -->
+        <input type="file" @change="fileChange">
+
+        <img :src="imgURL" alt="">
+    </div>    
+
+    <script> 
+        Vue.createApp({
+            data(){
+                return {                    
+                    imgURL: '',
+                }
+            },
+            methods: {
+                fileChange( e ){
+                    let file = e.target.files[0]
+                    // console.log(file)
+
+                    let readFile = new FileReader()
+                    readFile.readAsDataURL(file)
+
+                    // 1 不要在 Vue 裡面使用 function(){}
+                    // readFile.addEventListener('load', function(){
+                    //     console.log(this)
+                        
+                    //     this.imgURL = readFile.result
+                    // })
+
+                    // 2 將上述程式改成箭頭函數
+                    // readFile.addEventListener('load', () => {
+                    //     console.log(this)
+                    //     this.imgURL = readFile.result
+                    // })
+
+                    // 3 呼叫外部函數 
+                    readFile.addEventListener('load', this.loadImage)
+                
+                },
+                loadImage( e ){
+                    this.imgURL = e.target.result
+                },
+            },
+            computed: {},
+        }).mount('#app')
+    </script>
+</body>
+</html>

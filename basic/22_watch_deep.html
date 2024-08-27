@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model.number.lazy="num.x" />
+    </div>
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {
+            num: {
+              x: 10,
+              y: 20,
+              z: 30,
+            },
+          };
+        },
+        methods: {},
+        computed: {},
+        watch: {
+          num: {
+            handler(newValue) {
+              console.log(`num: ${newValue.x}`);
+            },
+            immediate: false,
+            deep: true,
+          },
+        },
+        mounted() {},
+      });
+
+      vm.mount(`#app`);
+    </script>
+  </body>
+</html>

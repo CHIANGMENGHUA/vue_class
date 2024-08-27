@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.7.0/dist/vuetify.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@3.7.0/dist/vuetify.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap");
+    </style>
+    <style>
+      body {
+        background-color: bisque;
+      }
+
+      #app {
+        text-align: center;
+        margin-top: 5%;
+      }
+
+      h1 {
+        font-family: "Bungee Tint", sans-serif;
+        font-size: 100px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .inner {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        width: 300px;
+      }
+    </style>
+    <title>Calender</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Calender</h1>
+      <div class="container">
+        <div class="inner">
+          <h2>Year</h2>
+          <v-select
+            class="select"
+            label="Select"
+            variant="outlined"
+            bg-color="teal-lighten-3"
+            :items="years"
+            v-model="selectedYear"
+            @update:model-value="updateDates"
+          ></v-select>
+        </div>
+
+        <div class="inner">
+          <h2>Month</h2>
+          <v-select
+            class="select"
+            label="Select"
+            variant="outlined"
+            bg-color="cyan-lighten-3"
+            :items="months"
+            v-model="selectedMonth"
+            @update:model-value="updateDates"
+          ></v-select>
+        </div>
+
+        <div class="inner">
+          <h2>Day</h2>
+          <v-select
+            class="select"
+            label="Select"
+            variant="outlined"
+            bg-color="light-blue-lighten-3"
+            :items="dates"
+            v-model="selectedDate"
+          ></v-select>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+      const { createVuetify } = Vuetify;
+      const vuetify = createVuetify();
+
+      const app = createApp({
+        data() {
+          return {
+            years: [],
+            months: [],
+            dates: [],
+            selectedYear: null,
+            selectedMonth: null,
+            selectedDate: null,
+          };
+        },
+
+        created() {
+          this.populateYears();
+          this.populateMonths();
+        },
+
+        methods: {
+          populateYears() {
+            for (let i = 1990; i <= 2024; i++) {
+              this.years.push(i);
+            }
+          },
+
+          populateMonths() {
+            for (let i = 1; i <= 12; i++) {
+              this.months.push(i);
+            }
+          },
+
+          updateDates() {
+            if (this.selectedYear === null || this.selectedMonth === null) {
+              return;
+            }
+
+            let end = 31;
+
+            if (this.selectedMonth === 2) {
+              if (
+                this.selectedYear % 4 === 0 ||
+                (this.selectedYear % 400 === 0 && this.selectedYear % 100 === 0)
+              ) {
+                end = 29;
+              } else {
+                end = 28;
+              }
+            }
+
+            if (
+              this.selectedMonth === 4 ||
+              this.selectedMonth === 6 ||
+              this.selectedMonth === 9 ||
+              this.selectedMonth === 11
+            ) {
+              end = 30;
+            }
+
+            // Clear existing dates
+            this.dates = [];
+
+            for (let i = 1; i <= end; i++) {
+              this.dates.push(i);
+            }
+
+            // Clear selectedDate
+            this.selectedDate = null;
+          },
+        },
+
+        computed: {},
+      });
+
+      app.use(vuetify).mount("#app");
+    </script>
+  </body>
+</html>

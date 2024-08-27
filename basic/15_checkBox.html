@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="checkbox" v-model="entity" value="a" checked /> A
+      <input type="checkbox" v-model="entity" value="b" /> B
+      <input type="checkbox" v-model="entity" value="c" /> C
+      <br />
+      <span v-for="e in entity">{{e}}</span>
+      <br />
+      <input type="checkbox" v-model="agree" /> I agree
+      <br />
+      <span>{{agree}}</span>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            entity: [],
+            agree: "false",
+          };
+        },
+        methods: {},
+        computed: {},
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

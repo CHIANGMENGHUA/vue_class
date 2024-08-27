@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <my-component></my-component>
+      <counter></counter>
+    </div>
+
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {};
+        },
+        methods: {},
+        computed: {},
+        mounted() {},
+        watch: {},
+        components: {
+          "my-component": {
+            template: `
+              <h1 style="color: red">Hello</h1>
+            `,
+          },
+
+          // myComponent: {
+          //   template: `
+          //     <h1 style="color: red">Hello</h1>
+          //   `,
+          // },
+
+          // MyComponent: {
+          //   template: `
+          //     <h1 style="color: red">Hello</h1>
+          //   `,
+          // },
+        },
+      });
+
+      vm.component("counter", {
+        template: `
+          <h1>lorem</h1>
+          <img src="../images/Shinnosuke/Shinnosuke1.jpg" />
+        `,
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>

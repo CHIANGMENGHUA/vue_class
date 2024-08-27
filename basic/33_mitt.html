@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <button @click="count++">add</button>
+      <h3>{{count}}</h3> -->
+      <my-button></my-button>
+      <my-counter></my-counter>
+    </div>
+
+    <script>
+      const emitter = mitt();
+      const vm = Vue.createApp();
+
+      vm.component("my-button", {
+        template: `
+          <button @click="clicked">add</button>
+        `,
+
+        methods: {
+          clicked() {
+            emitter.emit("add");
+          },
+        },
+      });
+
+      vm.component("my-counter", {
+        template: `
+          <h3>{{count}}</h3>
+        `,
+
+        data() {
+          return {
+            count: 0,
+          };
+        },
+
+        created() {
+          emitter.on("add", () => {
+            this.count++;
+          });
+        },
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>

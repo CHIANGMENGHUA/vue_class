@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      .box {
+        border: 8px dashed #ccc;
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        position: relative;
+      }
+
+      .add {
+        font: bold 100px Tahoma;
+        color: #ccc;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .box input {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+      }
+
+      .upload {
+        margin-top: 10px;
+        margin-left: 130px;
+      }
+    </style>
+    <title>VueJs</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="box">
+          <div class="add">+</div>
+          <input type="file" @change="fileChange" />
+        </div>
+        <div class="upload">
+          <button>Upload</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            imgUrl: "",
+          };
+        },
+        methods: {
+          fileChange(event) {
+            let fileReader = new FileReader();
+            fileReader.readAsDataURL(event.target.files[0]);
+            fileReader.addEventListener("load", () => {
+              let image = document.createElement("img");
+              image.src = fileReader.result;
+              image.style.alignItems = "center";
+              image.style.width = "100%";
+              image.style.height = "100%";
+              let box = document.querySelector(".box");
+
+              box.innerHTML = "";
+
+              box.appendChild(image);
+            });
+          },
+        },
+        computed: {},
+      }).mount(`#app`);
+    </script>
+  </body>
+</html>

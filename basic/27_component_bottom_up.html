@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <the-button @click="formChild"></the-button>
+    </div>
+
+    <script>
+      const vm = Vue.createApp({
+        methods: {
+          /*
+          formChild() {
+            alert("fuck");
+          },
+          */
+
+          formChild(fuck) {
+            alert(`fuck ${fuck}`);
+          },
+        },
+      });
+
+      vm.component("the-button", {
+        // top -> down
+        /*
+        template: `
+          <button @click="fuck">click</button>
+        `,
+        methods: {
+          fuck() {
+            alert("fuck");
+          },
+        },
+        */
+
+        // bottom -> up
+        template: `<button @click="fucked">fuck</button>`,
+        methods: {
+          fucked() {
+            this.$emit("fuck", 666);
+          },
+        },
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>

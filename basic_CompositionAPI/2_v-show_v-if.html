@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">  <!-- HTML DOM template -->
+        <h1>{{message}}</h1>
+
+        <p v-show="loading">Loading(v-show)</p>
+        <p v-if="loading">Loading(v-if)</p>
+    </div>
+    
+    <script>
+        Vue.createApp({
+            data(){     // 變數放這裡
+                return {
+                    message: 'Hello',
+                    loading: true,
+                    // if false, check devtools --> Elements
+                }
+            },
+        }).mount('#app')  
+    </script>
+</body>
+</html>

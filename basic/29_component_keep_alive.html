@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="content='name'">name</button>
+      <button @click="content='date'">date</button>
+      <button @click="content='lessons'">lessons</button>
+      <button @click="content='apply'">apply</button>
+      <br />
+      <br />
+      <keep-alive>
+        <component :is="content"></component>
+      </keep-alive>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            content: "name",
+            name: "",
+            date: "",
+            lessons: "",
+            apply: "",
+          };
+        },
+        components: {
+          name: {
+            template: `
+              your name:
+              <input v-model="name">{{name}}</input>
+            `,
+          },
+
+          date: {
+            template: `
+            date:
+              <input v-model="date">{{date}}</input>
+            `,
+          },
+
+          lessons: {
+            template: `
+            lesson:
+              <input v-model="lessons">{{lessons}}</input>
+            `,
+          },
+
+          apply: {
+            template: `
+            apply:
+              <input v-model="apply">{{apply}}</input>
+            `,
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

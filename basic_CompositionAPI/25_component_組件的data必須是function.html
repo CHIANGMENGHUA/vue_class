@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style></style>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <button @click="count+=1"> Add </button>
+        <h3> {{count}} </h3>
+        <hr>
+
+        <counter></counter>
+        <counter></counter>
+        <counter></counter>
+    </div>    
+
+    <script> 
+        const vm = Vue.createApp ({
+            data(){
+                return {                    
+                    count: 0,
+                }
+            },
+            methods: {},
+            computed: {},        
+            mounted() {}, // 非同步大部分放這裡
+            watch: {},
+            components: {},
+        });
+
+        // 為什麼組件的 data 必須是 function?
+        // 組件可以重複使用，如果 counter 有好幾個，他們應該各自運作，
+        // 所以每次使用變數的時候，data 會臨時建立物件並 return 出去
+        vm.component('counter', {
+            data(){
+                return {
+                    count: 100,
+                    score: 0,
+                }
+            },
+            template: `
+                <button @click="count+=1"> Add </button>
+                <h3> {{count}} </h3>
+            `,
+        })
+
+        vm.mount('#app') 
+    </script>
+</body>
+</html>

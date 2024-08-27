@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+      .item {
+        background-color: #abc;
+        padding: 5px;
+        margin: 5px;
+        font-family: Tahoma;
+        width: 180px;
+      }
+      .item:hover {
+        background-color: #cba;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HTML DOM template -->
+      <!-- <todo-list></todo-list> -->
+      <todo-list />
+    </div>
+
+    <script>
+      const vm = Vue.createApp();
+
+      vm.component("todo-list", {
+        template: `
+                <todo-input @abc="addTask"></todo-input>
+                <ol>
+                    <todo-item v-for="(item, index) in tasks" :xyz="item" @click="removeTask(index)"></todo-item>
+                </ol>            
+            `,
+        data() {
+          return {
+            tasks: [],
+          };
+        },
+        methods: {
+          addTask(task) {
+            this.tasks.push(task);
+          },
+          removeTask(index) {
+            this.tasks.splice(index, 1);
+          },
+        },
+      });
+      vm.component("todo-input", {
+        template: `
+                <form @submit.prevent="submitData">  <!-- page 31 v-on 的修飾符 prevent -->
+                    <input type="text" v-model="task">
+                    <button> Submit </button>
+                </form>
+            `,
+        data() {
+          return {
+            task: "",
+          };
+        },
+        methods: {
+          submitData(e) {
+            // e.preventDefault();
+
+            this.$emit("abc", this.task);
+            this.task = "";
+          },
+        },
+      });
+      vm.component("todo-item", {
+        props: ["xyz"],
+        template: `<li class="item">{{xyz}}</li>`,
+      });
+
+      vm.mount("#app");
+    </script>
+  </body>
+</html>
+<!--  
+<form>
+    <input type="text">
+    <button> Submit </button>
+</form>
+<ol>
+    <li></li>
+</ol>
+-->

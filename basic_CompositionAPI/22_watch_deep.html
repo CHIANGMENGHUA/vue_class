@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app"> <!-- HTML DOM template -->
+        <input v-model.number.lazy="num.x">
+    </div>    
+
+    <script> 
+        // watch(偵聽器): 用來偵測 data 和 computed 的變化
+        const vm = Vue.createApp ({
+            data(){
+                return {                    
+                    num: {
+                        x: 10,
+                        y: 20,
+                        z: 30,
+                    },
+                }
+            },
+            methods: {},
+            computed: {},        
+            mounted() {}, // 非同步大部分放這裡
+            watch: {
+            // 1 宣告成函數(方法)
+            // 2 宣告成物件(Object)
+                num: {
+                    handler(newValue){
+                        console.log(`num.x: ${newValue.x}`)  
+                    },
+                    immediate: false,   // false by default, if true --> Vue 一建立(create)立刻執行 watch
+                    deep: true,       // false by default, if true --> Object 的欄位改變才能偵測出來
+                },
+            },
+        });
+        vm.mount('#app') 
+    </script>
+</body>
+</html>
