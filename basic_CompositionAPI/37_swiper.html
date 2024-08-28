@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.5/axios.js"></script>
+    <style>
+      img {
+        width: 95%;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      .book {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        width: 250px;
+        height: 400px;
+        margin: 10px;
+        padding: 10px;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HTML DOM template -->
+      <p>
+        <button @click="setLocalStorage">
+          Let JSON store into local storage
+        </button>
+        <button @click="getLocalStorage">Get JSON from local storage</button>
+        <button @click="clearAll">Clear All</button>
+      </p>
+      <div v-for="book in books" class="book">
+        <a :href="book.url">
+          <img :src="book.image" alt="" />
+        </a>
+        <h1>{{book.title}}</h1>
+        <p>{{book.author}}</p>
+      </div>
+    </div>
+
+    <script>
+      // ----------------------------------------------------------
+      // AJAX
+      //   √ 1 JavaScript: 使用 XMLHttpRequest 物件
+      // let xhr = new XMLHttpRequest()
+      // xhr.open()
+      // xhr.send()
+      // xhr.responseText
+      // xhr.responseXML
+      //     2 jQuery: $.get() | $.post() | $.getJSON() | $.ajax()
+      //   √ 3 ES6: 使用 Promise 物件的 then()
+      //   √ 4 HTML5: fetch API
+      //     5 NodeJS 的套件: Axios.js
+      //   √ 6 ES6 以後: Async, Await
+
+      //     處理的檔案格式: .json | .xml | .csv
+      // ----------------------------------------------------------
+      const vm = Vue.createApp({
+        data() {
+          return {
+            books: [],
+            temp: [],
+          };
+        },
+        methods: {},
+        computed: {},
+
+        mounted() {
+          // 非同步大部分放這裡
+          // $(選取內容).處理()
+          // $('button').click(function(){})
+          // jQuery
+          // $.getJSON('../XML_JSON_CSV/bookData.json', function(res){})
+          // $.getJSON('../XML_JSON_CSV/bookData.json', res => {})
+          // $.getJSON('../XML_JSON_CSV/bookData.json').then(res => {})
+
+          // $.getJSON('../XML_JSON_CSV/bookData.json').then(res => {
+          //     console.log(res)
+          //     this.books = res
+          // })
+
+          // Axios
+          // axios.get('../XML_JSON_CSV/bookData.json').then(res => {
+          //     console.log(res)
+          //     console.log(res.data)
+          //     this.books = res.data
+          // })
+
+          // Fetch API
+          // fetch('../XML_JSON_CSV/bookData.json').then(res => {
+          //     // console.log(res)
+          //     // console.log(res.json())
+          //     return res.json()
+          // }).then(jsonData => {
+          //     console.log(jsonData)
+          //     this.books = jsonData
+          // })
+
+          fetch("../tools/bookData.json")
+            .then((res) => res.json())
+            .then((jsonData) => (this.temp = jsonData));
+        },
+
+        methods: {
+          setLocalStorage() {
+            localStorage.setItem("books", JSON.stringify(this.temp));
+          },
+          getLocalStorage() {
+            this.books = JSON.parse(localStorage.getItem("books"));
+          },
+          clearAll() {
+            this.books = [];
+            localStorage.clear();
+          },
+        },
+      });
+      vm.mount("#app");
+    </script>
+  </body>
+</html>
