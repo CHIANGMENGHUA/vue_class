@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VueJS</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <style>
+      #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .header-link {
+        font: 24px tahoma;
+        text-align: center;
+      }
+
+      .content {
+        border: 1px solid black;
+        width: 800px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <p>
+        <a href="./10_v-model_decoration.html">Home</a>
+        <a href="./11_bind_class_css.html">About</a>
+        <a href="./12_bind_class_css_2.html">Products</a>
+      </p> -->
+      <p class="header-link">
+        <router-link class="link" to="/">Home</router-link> |
+        <router-link class="link" to="/about">About</router-link> |
+        <router-link class="link" to="/products">Products</router-link> |
+      </p>
+      <div class="content">
+        <router-view></router-view>
+      </div>
+    </div>
+
+    <script>
+      const Home = {
+        template: `
+        <div><h1> $Home$ </h1>
+        <hr>
+          <p class="context">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur illo labore neque quam hic fugit itaque eaque, delectus minus voluptatem doloremque corrupti maxime a ipsam nisi repellendus eius sequi exercitationem.</P>
+        </div>`,
+      };
+      const About = {
+        template: `
+        <div><h1> @About@ </h1>
+        <hr>
+          <p class="context">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur illo labore neque quam hic fugit itaque eaque, delectus minus voluptatem doloremque corrupti maxime a ipsam nisi repellendus eius sequi exercitationem.</P>
+          <hr>
+          <router-link class="link" to="/about/us">About us</router-link>
+          <router-view></router-view>
+        </div>`,
+      };
+
+      const AboutUs = {
+        template: `
+        <div><h1> @About us@ </h1>
+        <hr>
+          <p class="context">uuuuuuuuuuuuuuuuus.</P>
+        </div>`,
+      };
+
+      const items = {
+        1: "a",
+        2: "b",
+        3: "c",
+        4: "d",
+        5: "e",
+        6: "f",
+      };
+
+      const Products = {
+        template: `
+        <div><h1> &Products& </h1>
+        <hr>
+          <p>{{product}}</P>
+        </div>`,
+
+        computed: {
+          product() {
+            return items[this.$route.params.sn];
+          },
+        },
+      };
+
+      const routes = [
+        { path: "/", component: Home },
+        {
+          path: "/about",
+          component: About,
+          children: [{ path: "us", component: AboutUs }],
+        },
+        { path: "/products", component: Products },
+        {
+          path: "/products/:sn?",
+          component: Products,
+        },
+      ];
+
+      const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes: routes,
+      });
+
+      const vm = Vue.createApp({
+        data() {
+          return {};
+        },
+        methods: {},
+        mounted() {},
+        computed() {},
+      });
+
+      vm.use(router);
+      vm.mount("#app");
+    </script>
+  </body>
+</html>
